@@ -11,10 +11,6 @@ let hourField = document.querySelector('[data-hours]');
 let minuteField = document.querySelector('[data-minutes]');
 let secondField = document.querySelector('[data-seconds]');
 let calcDate = null;
-//////////////////////////////////////////////////// add listeners //////
-btn.addEventListener('click', startCountDownHandler);
-dateField.addEventListener('input', inputHandler);
-/////////////////////////////////////////////////// sync operations /////
 const options = {
   enableTime: true,
   dateFormat: 'Y-m-d H:i',
@@ -22,7 +18,10 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
 };
-
+//////////////////////////////////////////////////// add listeners //////
+btn.addEventListener('click', startCountDownHandler);
+dateField.addEventListener('input', inputHandler);
+/////////////////////////////////////////////////// sync operations /////
 flatpickr(dateField, options);
 btn.disabled = true;
 document.querySelectorAll('.field').forEach(elem => {
@@ -52,9 +51,11 @@ function inputHandler(e) {
   }
 }
 
-////////////////////////////////// ... it`s a final coundown... //////////
+////////////////////////////////// ... it`s a final coundown... ////////////
 function startCountDownHandler() {
   if (!calcDate) return;
+  dateField.disabled = true;
+  btn.disabled = true;
   let timerId = setInterval(function () {
     let difference = new Date(calcDate) - new Date();
     dayField.innerHTML = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -73,7 +74,7 @@ function startCountDownHandler() {
         description: 'That`s it...',
         duration: 2000,
       });
-      btn.disabled = true;
+      dateField.disabled = false;
     }
   }, 1000);
 }
