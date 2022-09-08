@@ -1,7 +1,8 @@
+////////////////////////////////////////////////// imports /////////////
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { XNotify } from './x-notify';
-
+////////////////////////////////////////////////// vars ////////////////
 const Notify = new XNotify('TopRight');
 let dateField = document.getElementById('datetime-picker');
 let btn = document.querySelector('button');
@@ -10,14 +11,27 @@ let hourField = document.querySelector('[data-hours]');
 let minuteField = document.querySelector('[data-minutes]');
 let secondField = document.querySelector('[data-seconds]');
 let calcDate = null;
+//////////////////////////////////////////////////// add listeners //////
 btn.addEventListener('click', startCountDownHandler);
 dateField.addEventListener('input', inputHandler);
-
-flatpickr(dateField, {
+/////////////////////////////////////////////////// sync operations /////
+const options = {
   enableTime: true,
   dateFormat: 'Y-m-d H:i',
-});
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+};
 
+flatpickr(dateField, options);
+btn.disabled = true;
+document.querySelectorAll('.field').forEach(elem => {
+  elem.style.cssText +=
+    'text-align: center;font-size: 25px;margin-top: 0px;display: inline-flex;flex-direction: column;';
+  elem.lastElementChild.style.cssText +=
+    'padding-top: 5px;font-size: 14px;text-transform: uppercase;';
+});
+///////////////////////////////// input handler //////////////////////////
 function inputHandler(e) {
   calcDate = e.target.value;
   if (new Date(calcDate) <= new Date()) {
@@ -38,6 +52,7 @@ function inputHandler(e) {
   }
 }
 
+////////////////////////////////// ... it`s a final coundown... //////////
 function startCountDownHandler() {
   if (!calcDate) return;
   let timerId = setInterval(function () {
@@ -51,13 +66,14 @@ function startCountDownHandler() {
     );
     secondField.innerHTML = Math.floor((difference % (1000 * 60)) / 1000);
 
-    if ((difference = 0)) {
+    if (difference < 1000) {
       clearInterval(timerId);
       Notify.info({
         title: 'Time`s up!',
         description: 'That`s it...',
         duration: 2000,
       });
+      btn.disabled = true;
     }
   }, 1000);
 }
