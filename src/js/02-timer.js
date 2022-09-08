@@ -44,6 +44,7 @@ function inputHandler(e) {
   } else {
     btn.disabled = false;
     Notify.success({
+      width: '300px',
       title: 'Entered date is correct',
       description: 'Start the final countdown...',
       duration: 2000,
@@ -70,6 +71,7 @@ function startCountDownHandler() {
     if (difference < 1000) {
       clearInterval(timerId);
       Notify.info({
+        width: '300px',
         title: 'Time`s up!',
         description: 'That`s it...',
         duration: 2000,
