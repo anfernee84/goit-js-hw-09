@@ -10,7 +10,7 @@ let dayField = document.querySelector('[data-days]');
 let hourField = document.querySelector('[data-hours]');
 let minuteField = document.querySelector('[data-minutes]');
 let secondField = document.querySelector('[data-seconds]');
-let calcDate = null;
+// let selectedDate = null;
 const options = {
   enableTime: true,
   dateFormat: 'Y-m-d H:i',
@@ -18,11 +18,12 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
 };
+const datePicker = flatpickr(dateField, options);
 //////////////////////////////////////////////////// add listeners //////
 btn.addEventListener('click', startCountDownHandler);
 dateField.addEventListener('input', inputHandler);
 /////////////////////////////////////////////////// sync operations /////
-flatpickr(dateField, options);
+// flatpickr(dateField, options);
 btn.disabled = true;
 document.querySelectorAll('.field').forEach(elem => {
   elem.style.cssText +=
@@ -32,8 +33,8 @@ document.querySelectorAll('.field').forEach(elem => {
 });
 ///////////////////////////////// input handler //////////////////////////
 function inputHandler(e) {
-  calcDate = e.target.value;
-  if (new Date(calcDate) <= new Date()) {
+  const selectedDate = datePicker.selectedDates[0];
+  if (new Date(selectedDate) <= new Date()) {
     btn.disabled = true;
     Notify.error({
       width: '300px',
@@ -54,11 +55,12 @@ function inputHandler(e) {
 
 ////////////////////////////////// ... it`s a final coundown... ////////////
 function startCountDownHandler() {
-  if (!calcDate) return;
+  const selectedDate = datePicker.selectedDates[0];
+  if (!selectedDate) return;
   dateField.disabled = true;
   btn.disabled = true;
   let timerId = setInterval(function () {
-    let difference = new Date(calcDate) - new Date();
+    let difference = new Date(selectedDate) - new Date();
     dayField.innerHTML = addLeadingZero(
       Math.floor(difference / (1000 * 60 * 60 * 24))
     );
@@ -86,5 +88,5 @@ function startCountDownHandler() {
 }
 //////////////////////////////////////////////////////////// addLeadingZero function /////////////
 function addLeadingZero(value) {
-  return String(value).addLeadingZeroStart(2, '0');
+  return String(value).padStart(2, '0');
 }
