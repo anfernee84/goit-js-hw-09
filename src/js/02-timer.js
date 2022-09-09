@@ -59,14 +59,14 @@ function startCountDownHandler() {
   btn.disabled = true;
   let timerId = setInterval(function () {
     let difference = new Date(calcDate) - new Date();
-    dayField.innerHTML = Math.floor(difference / (1000 * 60 * 60 * 24));
-    hourField.innerHTML = Math.floor(
-      (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    dayField.innerHTML = pad(Math.floor(difference / (1000 * 60 * 60 * 24)));
+    hourField.innerHTML = pad(
+      Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
     );
-    minuteField.innerHTML = Math.floor(
-      (difference % (1000 * 60 * 60)) / (1000 * 60)
+    minuteField.innerHTML = pad(
+      Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
     );
-    secondField.innerHTML = Math.floor((difference % (1000 * 60)) / 1000);
+    secondField.innerHTML = pad(Math.floor((difference % (1000 * 60)) / 1000));
 
     if (difference < 1000) {
       clearInterval(timerId);
@@ -79,4 +79,8 @@ function startCountDownHandler() {
       dateField.disabled = false;
     }
   }, 1000);
+}
+//////////////////////////////////////////////////////////// pad function /////////////
+function pad(value) {
+  return String(value).padStart(2, '0');
 }
