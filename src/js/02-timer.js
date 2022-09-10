@@ -35,7 +35,7 @@ document.querySelectorAll('.field').forEach(elem => {
     'addLeadingZeroding-top: 5px;font-size: 14px;text-transform: uppercase;';
 });
 ///////////////////////////////// input handler //////////////////////////
-function inputHandler(e) {
+function inputHandler() {
   const selectedDate = datePicker.selectedDates[0];
   if (new Date(selectedDate) <= new Date()) {
     btn.disabled = true;

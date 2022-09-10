@@ -9,22 +9,22 @@ class XNotify {
       color: 'rgb(255,255,255)',
       success: {
         title: 'Success Notification',
-        description: 'Whatever you did, it worked.',
+        description: '',
         background: 'rgb(40,200,80)',
       },
       error: {
         title: 'Error Notification',
-        description: "That didn't work out, did it?",
+        description: '',
         background: 'rgb(230,50,50)',
       },
       alert: {
         title: 'Alert Notification',
-        description: 'This is probably important...',
+        description: '',
         background: 'rgb(240,180,10)',
       },
       info: {
         title: 'Info Notification',
-        description: 'Just so you know...',
+        description: '',
         background: 'rgb(170,80,220)',
       },
     };

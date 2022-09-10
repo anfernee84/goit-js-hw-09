@@ -11,7 +11,7 @@ function getRandomHexColor() {
 function startColorChanging(e) {
   e.preventDefault();
   startButton.disabled = true;
-
+  document.body.style.backgroundColor = getRandomHexColor();
   timerId = setInterval(() => {
     document.body.style.backgroundColor = getRandomHexColor();
   }, 1000);
@@ -20,6 +20,5 @@ function startColorChanging(e) {
 function stopColorChanging(e) {
   e.preventDefault();
   clearTimeout(timerId);
-  //   timerId.unref();  ------ чого не працює? Або лише в ноді?
   startButton.disabled = false;
 }
