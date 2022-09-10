@@ -17,6 +17,9 @@ const options = {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
+  //   onClose(selectedDates) {
+  //     selectedDate = selectedDates[0];
+  //   },
 };
 const datePicker = flatpickr(dateField, options);
 //////////////////////////////////////////////////// add listeners //////
@@ -38,8 +41,8 @@ function inputHandler(e) {
     btn.disabled = true;
     Notify.error({
       width: '300px',
-      title: 'Out of date range',
-      description: 'You shold choose correct date',
+      title: 'Please choose a date in the future',
+      description: 'You shold pick correct date',
       duration: 2000,
     });
   } else {
@@ -86,7 +89,7 @@ function startCountDownHandler() {
     }
   }, 1000);
 }
-//////////////////////////////////////////////////////////// addLeadingZero function /////////////
+//////////////////////////////////////// addLeadingZero function /////////////
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
