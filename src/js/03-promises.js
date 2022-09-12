@@ -26,6 +26,9 @@ function submitHandler(e) {
           title: `❌ Rejected promise ${position} in ${delay}ms`,
           duration: 800,
         });
+      })
+      .finally(() => {
+        console.log('This is the end... My only friend, the end...');
       });
 
     currentTimer += stepDelay;
