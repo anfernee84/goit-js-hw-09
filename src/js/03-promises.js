@@ -11,6 +11,7 @@ function submitHandler(e) {
   e.preventDefault();
   let currentTimer = Number(delayField.value);
   let stepDelay = Number(delayStepField.value);
+  let amount = Number(promiceAmountField.value);
   for (let val = 1; val <= promiceAmountField.value; val++) {
     createPromise(val, currentTimer)
       .then(({ position, delay }) => {
@@ -28,7 +29,9 @@ function submitHandler(e) {
         });
       })
       .finally(() => {
-        console.log('This is the end... My only friend, the end...');
+        val === amount
+          ? console.log('This is the end... My only friend, the end...')
+          : null;
       });
 
     currentTimer += stepDelay;
