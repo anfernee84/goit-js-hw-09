@@ -29,7 +29,7 @@ function submitHandler(e) {
         });
       })
       .finally(() => {
-        val === amount
+        val === amount //позішон до сюди не добігає. Чому?
           ? console.log('This is the end... My only friend, the end...')
           : null;
       });
