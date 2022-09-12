@@ -15,16 +15,16 @@ function submitHandler(e) {
     createPromise(val, currentTimer)
       .then(({ position, delay }) => {
         Notify.success({
-          width: '400px',
+          width: '350px',
           title: `✅ Fulfilled promise ${position} in ${delay}ms`,
-          duration: 500,
+          duration: 800,
         });
       })
       .catch(({ position, delay }) => {
         Notify.error({
-          width: '400px',
+          width: '350px',
           title: `❌ Rejected promise ${position} in ${delay}ms`,
-          duration: 500,
+          duration: 800,
         });
       });
 
