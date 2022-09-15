@@ -11,9 +11,9 @@ function submitHandler(e) {
   e.preventDefault();
   let currentTimer = Number(delayField.value);
   let stepDelay = Number(delayStepField.value);
-  let amount = Number(promiceAmountField.value);
+  const promises = [];
   for (let val = 1; val <= promiceAmountField.value; val++) {
-    createPromise(val, currentTimer)
+    const anotherPromiseInTheWall = createPromise(val, currentTimer)
       .then(({ position, delay }) => {
         Notify.success({
           width: '350px',
@@ -27,15 +27,15 @@ function submitHandler(e) {
           title: `❌ Rejected promise ${position} in ${delay}ms`,
           duration: 800,
         });
-      })
-      .finally(() => {
-        val === amount //position до сюди не добігає. Чому?
-          ? console.log('This is the end... My only friend, the end...')
-          : null;
       });
+
+    promises.push(anotherPromiseInTheWall);
 
     currentTimer += stepDelay;
   }
+  Promise.allSettled(promises).then(() => {
+    console.log('This is the end... My only friend, the end...');
+  });
 }
 
 function createPromise(position, delay) {
